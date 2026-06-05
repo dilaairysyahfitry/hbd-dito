@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBD M. Dito Rahmadiansyah ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #66fcf1;
+            --secondary: #45a29e;
+            --dark: #0b0c10;
+            --darker: #1f2833;
+            --text: #c5c6c7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* --- Audio Control --- */
+        .audio-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .music-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+        .music-btn:hover { background: var(--primary); color: var(--dark); }
+
+        /* --- Section Styling --- */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 800;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .birth-date {
+            font-size: 1.5rem;
+            letter-spacing: 8px;
+            color: #ff477e;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            animation: bounce 2s infinite;
+            color: var(--primary);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        /* --- Main Profile --- */
+        .profile-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            max-width: 1000px;
+            text-align: left;
+        }
+        .main-photo-frame {
+            width: 300px;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.3);
+        }
+        .main-photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- Memory Section --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            width: 100%;
+            margin-top: 50px;
+        }
+
+        .memory-card {
+            background: var(--darker);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.5s;
+        }
+        .memory-card:hover { border-color: var(--primary); transform: translateY(-10px); }
+        .memory-img-wrapper {
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+        }
+        .memory-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .memory-info { padding: 20px; text-align: left; }
+        .memory-info span { color: var(--primary); font-size: 0.8rem; letter-spacing: 1px; display: block; margin-bottom: 5px;}
+        .memory-info h4 { color: #fff; margin-bottom: 5px; }
+
+        /* --- Quote Section --- */
+        .quote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(1.5rem, 4vw, 2.3rem);
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+        /* --- Ambition Section --- */
+        .ambition-box {
+            background: linear-gradient(145deg, #1f2833, #0b0c10);
+            padding: 40px;
+            border-radius: 20px;
+            border-left: 5px solid var(--primary);
+            max-width: 700px;
+            text-align: left;
+        }
+
+        /* --- Animations & Initial Overlay --- */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        .start-btn {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.4s;
+            margin-top: 20px;
+        }
+        .start-btn:hover { background: var(--primary); color: var(--dark); box-shadow: 0 0 20px var(--primary); }
+
+        #overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--dark);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .profile-container { flex-direction: column; text-align: center; }
+            section { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="overlay">
+        <h2 style="margin-bottom: 20px; letter-spacing: 5px; font-weight: 300;">UNTUK DITO</h2>
+        <button class="start-btn" onclick="initPage()">BUKA PERJALANAN ✨</button>
+    </div>
+
+    <div class="audio-container">
+        <button class="music-btn" onclick="toggleMusic()">
+            <span id="icon">🎵</span> <span id="status">Putar Musik</span>
+        </button>
+    </div>
+
+    <audio id="myMusic" loop>
+        <source src="musik.mp3" type="audio/mpeg">
+    </audio>
+
+    <section>
+        <div data-aos="fade-up">
+            <p style="letter-spacing: 5px; color: var(--text); margin-bottom: 10px;">THE DREAMER'S TIMELINE</p>
+            <h1 class="hero-title">M. DITO<br>RAHMADIANSYAH</h1>
+            <div class="birth-date">10 JUNI 2007</div>
+            <p style="max-width: 500px; line-height: 1.8; color: var(--text); margin: 0 auto;">
+                Setiap kisah hebat berawal dari sebuah langkah kecil penuh keyakinan. Menandai babak baru perjalanan hidupmu hari ini.
+            </p>
+        </div>
+        <div class="scroll-down">GULIR KE BAWAH</div>
+    </section>
+
+    <section style="background: #0f1115;">
+        <div class="profile-container" data-aos="fade-up">
+            <div class="main-photo-frame">
+                <img src="dito1.jpg" alt="M. Dito Rahmadiansyah">
+            </div>
+            <div style="max-width: 500px;">
+                <h2 style="color: var(--primary); margin-bottom: 15px; font-size: 2rem;">The Man of The Day.</h2>
+                <p style="line-height: 1.8; color: var(--text);">
+                    Lahir pada 10 Juni 2007, Dito tumbuh menjadi pribadi yang penuh ambisi, fokus pada impian, dan siap menghadapi rintangan apa pun demi meraih tempat tertinggi dalam hidupnya.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="ambition-box" data-aos="fade-right">
+            <h2 style="color: var(--primary); margin-bottom: 20px;">JIWA SEORANG PEMIMPIN</h2>
+            <p style="line-height: 1.8; margin-bottom: 15px;">
+                Menjadi yang terbaik tidak dibangun dalam waktu semalam. Lewat disiplin, fokus penuh, ketangguhan, serta mentalitas baja, Dito membuktikan bahwa tekad kuatnya mampu menaklukkan segala proses menuju cita-cita besarnya.
+            </p>
+            <p style="line-height: 1.8; color: var(--text);">
+                Bukan tentang seragam ataupun gelar, tetapi tentang keberanian diri, konsistensi melangkah maju, dan komitmen tinggi untuk selalu melindungi serta memberikan yang terbaik.
+            </p>
+        </div>
+    </section>
+
+    <section id="memories" style="background: #0f1115;">
+        <h2 data-aos="fade-up" style="font-size: 2.5rem; letter-spacing: 3px;">MEMORY <span style="color: var(--primary);">LANE</span></h2>
+        <p style="color: var(--text); margin-top: 5px;" data-aos="fade-up">Rekam jejak perjuangan, kerja keras, dan dedikasi.</p>
+        
+        <div class="grid-container">
+            <div class="memory-card" data-aos="zoom-in">
+                <div class="memory-img-wrapper">
+                    <img src="dito2.jpg" class="memory-img" alt="Dito Aksi">
+                </div>
+                <div class="memory-info">
+                    <span>FOCUS & DEDICATION</span>
+                    <h4>Aksi Nyata</h4>
+                    <p>Fokus penuh pada target di depan mata, tanpa ragu melangkah maju.</p>
+                </div>
+            </div>
+            <div class="memory-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="memory-img-wrapper">
+                    <img src="dito3.jpg" class="memory-img" alt="Dito Captain">
+                </div>
+                <div class="memory-info">
+                    <span>LEADERSHIP</span>
+                    <h4>Jiwa Kapten</h4>
+                    <p>Mengemban tanggung jawab dengan penuh integritas dan keberanian.</p>
+                </div>
+            </div>
+            <div class="memory-card" data-aos="zoom-in" data-aos-delay="400">
+                <div class="memory-img-wrapper">
+                    <img src="dito4.jpg" class="memory-img" alt="Dito Juara">
+                </div>
+                <div class="memory-info">
+                    <span>VICTORY & ACHIEVEMENT</span>
+                    <h4>Hasil Kerja Keras</h4>
+                    <p>Setiap tetes keringat dan perjuangan selalu berbuah manis pada akhirnya.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="quote" data-aos="fade-up">
+            "Looking back on the things I've done<br>
+            I was trying to be someone..."
+        </div>
+        <p style="margin-top: 25px; color: var(--primary); letter-spacing: 5px; font-size: 0.9rem;" data-aos="fade-up" data-aos-delay="200">
+            — SHAPE OF MY HEART, BACKSTREET BOYS
+        </p>
+    </section>
+
+    <section style="background: radial-gradient(circle at bottom, #1f2833 0%, #0b0c10 80%);">
+        <div data-aos="zoom-out-up">
+            <h1 style="font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 20px;">HAPPY BIRTHDAY, <span style="color: var(--primary);">DITO!</span></h1>
+            <p style="max-width: 650px; margin: 0 auto 30px; line-height: 2; color: var(--text);">
+                Selamat ulang tahun untuk M. Dito Rahmadiansyah! Semoga di usia yang semakin dewasa ini, langkahmu kian mantap, kesehatan dan kebahagiaan selalu menyertaimu, serta segala cita-cita besar yang tengah kamu perjuangkan segera berada di dalam genggaman. 
+            </p>
+            <p style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--primary); font-size: 1.3rem;">
+                "Keep shining, keep fighting, and show them the shape of your heart!"
+            </p>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: false
+        });
+
+        const music = document.getElementById('myMusic');
+        const status = document.getElementById('status');
+        const icon = document.getElementById('icon');
+
+        function initPage() {
+            document.getElementById('overlay').style.display = 'none';
+            toggleMusic();
+        }
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play().catch(error => {
+                    console.log("Audio play diblokir oleh browser, butuh interaksi pengguna tambahan.");
+                });
+                status.innerText = "Jeda Musik";
+                icon.innerText = "⏸️";
+            } else {
+                music.pause();
+                status.innerText = "Putar Musik";
+                icon.innerText = "🎵";
+            }
+        }
+    </script>
+</body>
+</html>
